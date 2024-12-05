@@ -1,5 +1,10 @@
 import time
 
+from hw.code.ui.locators.login_page_locators import LoginPageLocators
+from hw.code.ui.pages.base_page import BasePage
+from hw.code.ui.pages.audience_page import AudiencePage
+
+
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from hw.code.ui.locators.login_page_locators import LoginPageLocators
@@ -60,3 +65,18 @@ class LoginPage(BasePage):
 
     def wait_for_url_change(self, old_url, timeout=30):
         WebDriverWait(self.driver, timeout).until(EC.url_changes(old_url))
+
+    def login_for_audience(self, username, password):
+        self.driver.get(self.url)
+
+        self.go_to_cabinet()
+        self.click_mail()
+        self.enter_username(username)
+        self.click_next_button()
+        self.click_no_vkid_button()
+        self.enter_password(password)
+        self.click_continue_mail()
+        time.sleep(20)
+
+        return AudiencePage(self.driver)
+
