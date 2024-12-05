@@ -333,8 +333,11 @@ class CommercePage(BasePage):
     def set_item_count(self, count: int):
         self.CATALOG_COUNT = count
 
-    def catalog_gone(self) -> bool:
-        return len(self.find_all(self.locators.CATALOG_LIST_ITEM)) == self.CATALOG_COUNT
+    def catalog_gone(self) -> int:
+        catalogs = self.find_all(self.locators.CATALOG_LIST_ITEM)
+        if not catalogs:
+            return 0
+        return len(catalogs)
 
     def close_settings(self):
         while not self.sidebar_became_invisible():

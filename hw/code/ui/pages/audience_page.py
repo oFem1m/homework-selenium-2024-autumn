@@ -16,3 +16,7 @@ class AudiencePage(BasePage):
 
     def checking_open_audience_creation_menu(self):
         assert self.is_element_present(self.locators.AUDIENCE_CREATION_ELEMENT, 10), "Audience creation menu is not displayed"
+
+    def is_opened(self):
+        # Реализуйте логику проверки, что вкладка открыта
+        return self.is_element_present(self.locators.AUDIENCE_TAB_ACTIVE, 10)
