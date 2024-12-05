@@ -8,6 +8,7 @@ from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from hw.code.ui.pages.base_page import BasePage
+from hw.code.ui.pages.leadform_page import LeadformPage
 from hw.code.ui.pages.login_page import LoginPage
 from hw.code.ui.pages.commerce_page import CommercePage
 from hw.code.ui.pages.registration_page import RegistrationPage
@@ -86,4 +87,12 @@ def commerce_page(login_page, login_data):
         login_data["username"],
         login_data["password"],
         redirect_url=CommercePage.url
+    )
+
+@pytest.fixture
+def leadform_page(login_page, login_data):
+    return login_page.login(
+        login_data["username"],
+        login_data["password"],
+        redirect_url=LeadformPage.url
     )
