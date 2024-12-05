@@ -35,6 +35,9 @@ class BasePage(object):
     def find(self, locator, timeout=None):
         return self.wait(timeout).until(EC.presence_of_element_located(locator))
 
+    def find_all(self, locator, timeout=None) -> list[WebElement]:
+        return self.wait(timeout).until(EC.visibility_of_all_elements_located(locator))
+
     @allure.step('Search')
     def search(self, query):
         try:
@@ -104,3 +107,17 @@ class BasePage(object):
 
     def send_keys_tab(self, input, value):
         input.send_keys(value, Keys.TAB)
+
+    def became_visible(self, locator, timeout=None):
+        try:
+            self.wait(timeout).until(EC.visibility_of_element_located(locator))
+            return True
+        except TimeoutException:
+            return False
+
+    def became_invisible(self, locator, timeout=None):
+        try:
+            self.wait(timeout).until(EC.invisibility_of_element_located(locator))
+            return True
+        except TimeoutException:
+            return False

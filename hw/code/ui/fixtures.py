@@ -9,6 +9,8 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from hw.code.ui.pages.base_page import BasePage
 from hw.code.ui.pages.login_page import LoginPage
+from hw.code.ui.pages.commerce_page import CommercePage
+from hw.code.ui.pages.registration_page import RegistrationPage
 
 
 @pytest.fixture()
@@ -63,6 +65,25 @@ def login_page(driver):
 
 @pytest.fixture
 def audience_page(login_page, login_data):
-    my_audience_page = login_page.login_for_audience(login_data["username"], login_data["password"])
+    my_audience_page = login_page.login(login_data["username"], login_data["password"])
     my_audience_page.open_audience_tab()
     return my_audience_page
+
+
+@pytest.fixture
+def registration_page(driver, login_page, login_data):
+    page = login_page.login(login_data["username"], login_data["password"])
+    if isinstance(page, RegistrationPage):
+        return page
+    else:
+        # Если после логина не была открыта RegistrationPage, выбрасываем исключение
+        raise Exception("После логина не была открыта RegistrationPage")
+
+@pytest.fixture
+def commerce_page(login_page, login_data):
+    # Выполняем логин и перенаправляем на страницу commerce
+    return login_page.login(
+        login_data["username"],
+        login_data["password"],
+        redirect_url=CommercePage.url
+    )
