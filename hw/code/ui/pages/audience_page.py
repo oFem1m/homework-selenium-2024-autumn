@@ -17,6 +17,10 @@ class AudiencePage(BasePage):
     def create_audience(self):
         self.click(self.locators.CREATE_AUDIENCE, 10)
 
+    def set_audience_name(self, value):
+        textarea = self.find(self.locators.AUDIENCE_NAME_INPUT)
+        textarea.send_keys(value)
+
     def add_source(self):
         self.click(self.locators.ADD_SOURCE, 10)
 
