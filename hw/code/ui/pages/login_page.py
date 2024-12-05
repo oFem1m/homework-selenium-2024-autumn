@@ -27,7 +27,7 @@ class LoginPage(BasePage):
         self.enter_password(password)
         self.click_continue_mail()
 
-        time.sleep(60)
+        #time.sleep(60)
 
         if redirect_url:
             self.driver.get(redirect_url)
@@ -76,7 +76,7 @@ class LoginPage(BasePage):
         self.click_no_vkid_button()
         self.enter_password(password)
         self.click_continue_mail()
-        time.sleep(20)
+        #time.sleep(20)
 
         return AudiencePage(self.driver)
 

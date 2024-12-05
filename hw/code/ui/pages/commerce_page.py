@@ -168,9 +168,9 @@ class CommercePage(BasePage):
     def has_input_feed_without_product(self):
         feed_link = self.find(self.locators.SELLER_INPUT)
         feed_link.send_keys(self.INPUTS_FEED_LIST[4])
-        time.sleep(1)
+       # time.sleep(1)
         self.click(self.locators.SUBMIT_BUTTON)
-        time.sleep(1)
+       # time.sleep(1)
         if not self.is_error_message_present(self.ERRORS_FEED_LIST[4], self.locators.INPUT_FEED_ERROR):
             print(f"Ожидаемое сообщение об ошибке не найдено: {self.ERRORS_FEED_LIST[4]}")
             return False
@@ -228,7 +228,7 @@ class CommercePage(BasePage):
         self.click(self.locators.CANCEL_BUTTON)
 
     def click_cross_button(self):
-        time.sleep(2)
+        #time.sleep(2)
         self.click(self.locators.CROSS_BUTTON)
 
     def enter_catalog_name(self):

@@ -65,10 +65,10 @@ class TestCommercePage(BaseCase):
 
     def test_has_input_feed_without_product(self, commerce_page):
         commerce_page.close_overlay()
-        time.sleep(5)
+        #time.sleep(5)
         commerce_page.click_create_button()
         commerce_page.click_feed_tabs()
-        time.sleep(5)
+        #time.sleep(5)
 
         assert commerce_page.has_input_feed_without_product()
 
